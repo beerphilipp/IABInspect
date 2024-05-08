@@ -1,0 +1,6 @@
+[submodule "01_static_analysis/soot"]
+	path = 01_static_analysis/soot
+	url = git@github.com:beerphilipp/soot.git
+[submodule "01_static_analysis/FlowDroid"]
+	path = 01_static_analysis/FlowDroid
+	url = git@github.com:beerphilipp/FlowDroid.git
