@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="resolver_button_bar_spacing">8.0dip</dimen>
+    <dimen name="resolver_empty_state_container_padding_bottom">48.0dip</dimen>
+    <item type="dimen" name="resolver_title_padding_bottom">@dimen/resolver_edge_margin</item>
+</resources>

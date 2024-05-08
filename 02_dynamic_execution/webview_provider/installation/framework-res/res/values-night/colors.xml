@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent_device_default">@color/accent_device_default_dark</color>
+    <color name="call_notification_answer_color">#ff5dba80</color>
+    <color name="call_notification_decline_color">#ffe66a5e</color>
+    <color name="chooser_gradient_background">@color/loading_gradient_background_color_dark</color>
+    <color name="chooser_gradient_highlight">@color/loading_gradient_highlight_color_dark</color>
+    <color name="chooser_row_divider">@color/list_divider_color_dark</color>
+    <color name="notification_default_color_current">@color/notification_default_color_dark</color>
+    <color name="notification_primary_text_color_current">@color/notification_primary_text_color_dark</color>
+    <color name="notification_secondary_text_color_current">@color/notification_secondary_text_color_dark</color>
+    <color name="overview_background">@color/overview_background_dark</color>
+    <color name="personal_apps_suspension_notification_color">#ff8ab4f8</color>
+    <color name="user_icon_6">#ff4ecde6</color>
+    <color name="user_icon_7">#fffbbc04</color>
+    <color name="user_icon_8">#fffa903e</color>
+</resources>

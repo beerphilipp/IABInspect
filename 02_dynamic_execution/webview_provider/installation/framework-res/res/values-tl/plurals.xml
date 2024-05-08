@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Mayroon kang %d na natitirang pagsubok bago ma-lock ang SIM.</item>
+        <item quantity="one">Mayroon kang %d natitirang pagsubok bago ma-lock ang SIM.</item>
+    </plurals>
+</resources>

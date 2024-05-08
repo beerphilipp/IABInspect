@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Jy het %d pogings oor voordat SIM gesluit word.</item>
+        <item quantity="one">Jy het %d poging oor voordat SIM gesluit word.</item>
+    </plurals>
+</resources>

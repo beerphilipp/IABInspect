@@ -1,0 +1,10 @@
+Flask==2.3.3
+Flask-Cors==3.0.10
+Flask-GraphQL==2.0.1
+frida==16.2.1
+frida-tools==12.2.1
+uiautomator2==2.16.25
+packaging==21.3
+python-dotenv
+setuptools
+lxml==5.2.1

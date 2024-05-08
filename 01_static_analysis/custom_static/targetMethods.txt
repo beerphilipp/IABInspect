@@ -1,0 +1,10 @@
+# This file is used to declare the methods that the forced execution engine will target
+# Comments can be added to the file using the # character
+# Empty lines are ignored
+
+# ------------- Android WebView -------------
+<android.webkit.WebView: void loadUrl(java.lang.String)>
+<android.webkit.WebView: void loadUrl(java.lang.String,java.util.Map)>
+<android.webkit.WebView: void loadData(java.lang.String,java.lang.String,java.lang.String)>
+<android.webkit.WebView: void loadDataWithBaseURL(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>
+<android.webkit.WebView: void postUrl(java.lang.String,byte[])>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+
+        let TAG = "__WV_INJECT__"
+        let REPORT = "REPORT"
+        let REGISTERED = "REGISTERED"
+
+        let FUNCTION_CALL = "FUNCTION_CALL"
+        let GETTER_SETTER = "GETTER_SETTER"
+        let GETTER_SETTER_SPECIAL = "GETTER_SETTER_SPECIAL"
+        let TT = "TRUSTED_TYPES"
+        let MUTATION_OBSERVER = "MUTATION_OBSERVER"
+        let CSP_VIOLATION = "CSP_VIOLATION"
+        let XHR_OPEN = "XHR_OPEN"
+        let XHR_SEND = "XHR_SEND"
+        let OBJ_CONSTRUCTOR = "OBJ_CONSTRUCTOR"
+
+        let TT_CREATE_HTML = "TT_CREATE_HTML"
+        let TT_CREATE_SCRIPT = "TT_CREATE_SCRIPT"
+        let TT_CREATE_SCRIPT_URL = "TT_CREATE_SCRIPT_URL"
+
+        let GET = "GET"
+        let SET = "SET"
+
+
+        let __hooked = {};
+        let oldLog = console.log;
+        let oldXMLHttpRequest = XMLHttpRequest;
+        function report(type, var1, var2) {
+            let hash = window.location.hash;
+            let splitHash = hash.split("#");
+            let id = splitHash[splitHash.length - 1];
+            var json = { "callId": id, "action": REPORT, "type": type, "var1": var1, "var2": var2 };
+            var req = new oldXMLHttpRequest()
+            req.open('POST', 'report', true);
+            req.send(JSON.stringify(json));
+
+        }
+        function registered(type, var1, var2) {
+            let hash = window.location.hash;
+            let splitHash = hash.split("#");
+            let id = splitHash[splitHash.length - 1];
+            var json = { "callId": id, "action": REGISTERED, "type": type, "var1": var1, "var2": var2 };
+            var req = new oldXMLHttpRequest()
+            req.open('POST', 'report', true);
+            req.send(JSON.stringify(json));
+        }
+
+        function isFnc(element, attribute) {
+            if (element.prototype) {
+                var proto = Object.getOwnPropertyDescriptor(element.prototype, attribute);
+                return proto && proto.hasOwnProperty('value');
+            } else {
+                return element[attribute] instanceof Function;
+            }
+        }
+
+        function hook(element, attribute) {
+            let elName = element.name ? element.name : element.constructor.name;
+            let key = `${elName}.${attribute}`;
+            if (isFnc(element, attribute)) {
+                registered(FUNCTION_CALL, key)
+                if (element.prototype) {
+                    __hooked[key] = Element.prototype[attribute];
+                    Element.prototype[attribute] = function () {
+                        let args = [];
+                        for (let a of arguments) { args.push(a); }
+                        report(FUNCTION_CALL, key, args);
+                        return __hooked[key].call(this, ...arguments);
+                    }
+                } else {
+                    __hooked[key] = element[attribute];
+                    element[attribute] = function () {
+                        let args = [];
+                        for (let a of arguments) { args.push(a); }
+                        report(FUNCTION_CALL, key, args);
+                        return __hooked[key].call(this, ...arguments);
+                    }
+                }
+            } else {
+                if (element.prototype) {
+                    registered(GETTER_SETTER, key)
+                    if (attribute.startsWith('on')) {
+                        __hooked[key] = {
+                            set: function (value) {
+                                this['event-' + attribute] = value;
+                                this.addEventListener(attribute.slice(2), value)
+                            },
+                            get: function () { return this['event-' + attribute]; }
+                        };
+                    } else {
+                        __hooked[key] = {
+                            set: Object.getOwnPropertyDescriptor(element.prototype, attribute).set,
+                            get: Object.getOwnPropertyDescriptor(element.prototype, attribute).get
+                        };
+                    }
+                    Object.defineProperty(element.prototype, attribute, {
+                        set: function (value) {
+                            report(SET, key, value);
+                            __hooked[key].set.call(this, value);
+                        },
+                        get: function () {
+                            report(GET, key);
+                            return __hooked[key].get.call(this);
+                        }
+                    });
+                } else {
+                    registered(GETTER_SETTER_SPECIAL, key)
+                    __hooked[key] = element[attribute];
+                    Object.defineProperty(element, attribute, {
+                        set: function (value) {
+                            report(SET, key, value);
+                            __hooked[key] = value;
+                        },
+                        get: function () {
+                            report(GET, key);
+                            return __hooked[key];
+                        }
+                    });
+                }
+            }
+
+        }
+
+        // All HTML Elements Objects
+        hook(Element, 'innerHTML');
+        hook(Element, 'outerHTML');
+        // Form Data
+        hook(HTMLFormElement, 'action');
+        hook(HTMLInputElement, 'value');
+        hook(HTMLAnchorElement, 'href');
+        // All Iframes Objects
+        hook(HTMLIFrameElement, 'srcdoc');
+        hook(HTMLIFrameElement, 'src');
+        // All Script Tags Objects
+        hook(HTMLScriptElement, 'text');
+
+        // All String to HTML functions
+        hook(Range, 'createContextualFragment');
+        hook(Element, 'insertAdjacentHTML');
+        hook(Element, 'setAttribute');
+        hook(document, 'writeln');
+        hook(document, 'write');
+        // String to JS Code sinks
+        hook(window, 'setInterval');
+        hook(window, 'setTimeout');
+        hook(window, 'eval');
+        Function = new Proxy(Function, {
+            construct: function (target, args) {
+                report(OBJ_CONSTRUCTOR, args);
+                return new target(...args);
+            }
+        });
+        registered(OBJ_CONSTRUCTOR)
+
+        // Data extraction
+        hook(window, 'fetch');
+        hook(document, 'cookie');
+        hook(window, 'postMessage');
+        XMLHttpRequest = new Proxy(XMLHttpRequest, {
+            construct: function (target, args) {
+                const xhr = new target(...args);
+                var oldOpen = xhr.open
+                xhr.open = function () {
+                    let argv = [];
+                    for (let a of arguments) { argv.push(a); }
+                    report(XHR_OPEN, argv);
+                }
+                var oldSend = xhr.send
+                xhr.send = function () {
+                    let argv = [];
+                    for (let a of arguments) { argv.push(a); }
+                    report(XHR_SEND, argv);
+                }
+                // Do whatever you want with XHR request
+                return xhr;
+            },
+        });
+        registered(XHR_OPEN)
+        registered(XHR_SEND)
+
+        // Add Mutation Observer to DOM
+        window.onload = function () {
+            let observer = new MutationObserver((mutationList, observer) => {
+                report(MUTATION_OBSERVER, mutationList);
+            });
+            observer.observe(document, {
+                attributes: true,
+                attributeOldValue: true,
+                childList: true,
+                subtree: true,
+                characterData: true,
+                characterDataOldValue: true
+            });
+        };
+        registered(MUTATION_OBSERVER)
+
+        // Register CSP "observer"
+        if ('SecurityPolicyViolationEvent' in window) {
+            window.addEventListener('securitypolicyviolation', function (e) {
+                report(CSP_VIOLATION, e)
+                //report(`Security Violation (CSP) for: ${e.violatedDirective}`);
+            });
+            registered(CSP_VIOLATION)
+        }
+
+        // Register TT "observer"
+        if (window.trustedTypes && trustedTypes.createPolicy) {
+            var escapePolicy = trustedTypes.createPolicy('default', {
+                createHTML: function (string) {
+                    report(TT_CREATE_HTML, string);
+                    return string;
+                },
+                createScript: function (string) {
+                    report(TT, TT_CREATE_SCRIPT, string);
+                    return string;
+                },
+                createScriptURL: function (string) {
+                    report(TT_CREATE_SCRIPT_URL, string);
+                    return string;
+                }
+            });
+            registered(TT)
+        }
+
+        // Event registrations
+        hook(EventTarget, 'addEventListener');
+        hook(document, 'addEventListener');
+        hook(window, 'addEventListener');
+        hook(document, 'onunload');
+        hook(window, 'onunload');
+        // "on" attribute events
+        hook(HTMLFormElement, 'onsubmit');
+        for (var keyEvent of ['onkeydown', 'onkeyup', 'onkeypress']) {
+            hook(HTMLInputElement, keyEvent);
+            hook(document, keyEvent);
+            hook(window, keyEvent);
+        }
+
+    </script>
+    <title>WebViewTest</title>
+    <meta http-equiv="Content-Security-Policy"
+          content="form-action 'none'; connect-src 'self'; navigate-to 'none'; trusted-types default; require-trusted-types-for 'script';">
+</head>
+<body>
+<h1>WebViewTestPage:</h1>
+<code><pre id="results"></pre></code>
+<form id="form" action="/login">
+    <label for="user">Username:</label><br>
+    <input type="text" id="username" name="user" required><br>
+    <label for="lname">Password:</label><br>
+    <input type="text" id="password" name="password" required><br><br>
+    <input type="submit" value="Submit">
+</form>
+<div id="test"></div>
+</body>
+</html>

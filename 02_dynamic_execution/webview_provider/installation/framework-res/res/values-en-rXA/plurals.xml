@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">[Ýöû ĥåVé %d ŕéḿåîñîñĝ åţţéḿþţš ɓéƒöŕé ŠÎḾ îš ļöçķéð. one two three four five six]</item>
+        <item quantity="one">[Ýöû ĥåVé %d ŕéḿåîñîñĝ åţţéḿþţ ɓéƒöŕé ŠÎḾ îš ļöçķéð. one two three four five six]</item>
+    </plurals>
+</resources>

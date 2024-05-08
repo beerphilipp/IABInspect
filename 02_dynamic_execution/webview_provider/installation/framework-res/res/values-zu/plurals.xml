@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Unemizamo engu-%d esele ngaphambi kokuthi i-SIM ikhiywe.</item>
+        <item quantity="one">Unemizamo engu-%d esele ngaphambi kokuthi i-SIM ikhiywe.</item>
+    </plurals>
+</resources>

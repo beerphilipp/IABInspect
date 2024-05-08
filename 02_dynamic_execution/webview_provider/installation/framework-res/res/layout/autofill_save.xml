@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/autofill_bottomsheet_background" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/autofill_save" android:background="?^attr-private/colorSurface" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/autofill_save_outer_top_margin" android:layout_marginStart="24.0dip" android:layout_marginEnd="24.0dip">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:layout_gravity="center" android:id="@id/autofill_save_icon" android:layout_width="@dimen/autofill_save_icon_size" android:layout_height="@dimen/autofill_save_icon_size" android:scaleType="fitStart" />
+            <TextView android:textAppearance="@style/AutofillSaveUiTitle" android:gravity="center" android:id="@id/autofill_save_title" android:paddingBottom="24.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/autofill_save_title" />
+            <com.android.server.autofill.ui.CustomScrollView android:id="@id/autofill_save_custom_subtitle" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/autofill_save_scroll_view_top_margin" />
+        </LinearLayout>
+        <com.android.internal.widget.ButtonBarLayout android:theme="@style/Theme.DeviceDefault.AutofillHalfScreenDialogButton" android:layout_gravity="end" android:orientation="horizontal" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="48.0dip" android:layout_marginTop="32.0dip" android:layout_marginBottom="18.0dip">
+            <Button android:id="@id/autofill_save_no" android:layout_width="wrap_content" android:layout_height="36.0dip" android:layout_marginTop="6.0dip" android:layout_marginBottom="6.0dip" android:text="@string/autofill_save_no" style="@style/AutofillHalfSheetOutlinedButton" />
+            <Space android:visibility="invisible" android:layout_width="0.0dip" android:layout_height="0.0dip" android:layout_weight="1.0" />
+            <Button android:id="@id/autofill_save_yes" android:layout_width="wrap_content" android:layout_height="36.0dip" android:layout_marginTop="6.0dip" android:layout_marginBottom="6.0dip" android:text="@string/autofill_save_yes" style="@style/AutofillHalfSheetTonalButton" />
+        </com.android.internal.widget.ButtonBarLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,24 @@
+version: 2.9.1
+apkFileName: framework-res.apk
+isFrameworkApk: true
+usesFramework:
+  ids:
+  tag: null
+sdkInfo:
+  minSdkVersion: 33
+  targetSdkVersion: 33
+packageInfo:
+  forcedPackageId: 1
+  renameManifestPackage: null
+versionInfo:
+  versionCode: 33
+  versionName: 13
+resourcesAreCompressed: false
+sharedLibrary: false
+sparseResources: false
+unknownFiles:
+  stamp-cert-sha256: 8
+doNotCompress:
+- resources.arsc
+- png
+- ogg

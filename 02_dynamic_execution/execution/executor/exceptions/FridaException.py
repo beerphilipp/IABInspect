@@ -1,0 +1,2 @@
+class FridaException(Exception):
+    pass

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WV Injection Web Server</string>
+    <string name="server_status">Will try to start server...</string>
+    <string name="serverStartedMessage">Server started</string>
+    <string name="ipAddressUnknown">No IP address</string>
+    <string name="localIpAddressMessage">Connect to https://%1$s:8443</string>
+    <string name="start_server">Start Server</string>
+    <string name="stop_server">Stop Server</string>
+</resources>

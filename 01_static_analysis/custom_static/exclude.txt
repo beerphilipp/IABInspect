@@ -1,0 +1,14 @@
+# These are libraries that should be excluded from the analysis. Each statement can end with a wildcard (*).
+
+#com.google.android.
+#com.google.ads.
+#com.facebook.ads.
+#com.startapp.sdk.
+#com.chartboost.sdk.
+#com.unity3d.services.ads.
+#com.safedk.android
+#com.applovin.
+#com.aerserv.sdk.
+#com.ironsource.sdk.
+#com.appboy.
+#com.adobe.marketing.

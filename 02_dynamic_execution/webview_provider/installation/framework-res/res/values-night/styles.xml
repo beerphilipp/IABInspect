@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DeviceDefault.Settings" parent="@style/Theme.DeviceDefault">
+        <item name="colorBackground">@color/primary_dark_device_default_settings</item>
+        <item name="colorPrimary">@color/primary_dark_device_default_settings</item>
+        <item name="colorPrimaryDark">@color/primary_dark_device_default_settings</item>
+        <item name="navigationBarColor">@color/black</item>
+        <item name="colorEdgeEffect">@color/edge_effect_device_default_dark</item>
+        <item name="windowLightStatusBar">false</item>
+        <item name="windowLightNavigationBar">false</item>
+        <item name="colorListDivider">@color/list_divider_color_dark</item>
+        <item name="opacityListDivider">@color/list_divider_opacity_device_default_dark</item>
+    </style>
+    <style name="Theme.DeviceDefault.DayNight" parent="@style/Theme.DeviceDefault" />
+    <style name="ThemeOverlay.DeviceDefault.Accent.DayNight" parent="@style/ThemeOverlay.DeviceDefault.Accent" />
+    <style name="Theme.DeviceDefault.AutofillHalfScreenDialogButton" parent="@style/Theme.DeviceDefault.Panel">
+        <item name="textColorPrimary">@color/system_neutral1_100</item>
+        <item name="textColorSecondary">@color/system_neutral2_100</item>
+        <item name="selectableItemBackground">@color/transparent</item>
+        <item name="colorAccentPrimary">@color/system_accent1_700</item>
+        <item name="colorAccentPrimaryVariant">@color/system_accent1_200</item>
+        <item name="colorListDivider">@color/white</item>
+    </style>
+    <style name="Theme.DeviceDefault.AutofillHalfScreenDialogList" parent="@style/Theme.DeviceDefault.DayNight">
+        <item name="colorForeground">@color/white</item>
+    </style>
+    <style name="Theme.DeviceDefault.Dialog.Alert.DayNight" parent="@style/Theme.DeviceDefault.Dialog.Alert" />
+    <style name="Theme.DeviceDefault.Dialog.AppError" parent="@style/Theme.DeviceDefault.Dialog.Alert" />
+    <style name="Theme.DeviceDefault.Resolver" parent="@style/Theme.DeviceDefault.ResolverCommon">
+        <item name="textColorSecondary">@color/resolver_text_color_secondary_dark</item>
+        <item name="colorBackgroundFloating">@color/GM2_grey_800</item>
+        <item name="windowLightNavigationBar">false</item>
+    </style>
+    <style name="Theme.DeviceDefault.Settings.DialogBase" parent="@style/Theme.Material.BaseDialog">
+        <item name="alertDialogTheme">@style/Theme.DeviceDefault.Dialog.Alert</item>
+        <item name="colorPrimary">@color/primary_dark_device_default_settings</item>
+        <item name="colorPrimaryDark">@color/primary_dark_device_default_settings</item>
+        <item name="colorAccent">@color/accent_device_default_dark</item>
+        <item name="colorSecondary">@color/secondary_device_default_settings</item>
+        <item name="colorError">@color/error_color_device_default_dark</item>
+    </style>
+    <style name="Theme.DeviceDefault.SystemUI" parent="@style/Theme.DeviceDefault">
+        <item name="alertDialogTheme">@style/Theme.DeviceDefault.Dialog.Alert</item>
+        <item name="colorControlNormal">?textColorPrimary</item>
+        <item name="colorPrimaryDark">@color/primary_dark_device_default_settings</item>
+        <item name="colorAccent">@color/accent_device_default_dark</item>
+        <item name="colorSecondary">@color/secondary_device_default_settings</item>
+        <item name="colorError">@color/error_color_device_default_dark</item>
+        <item name="forceDarkAllowed">false</item>
+    </style>
+    <style name="Theme.DeviceDefault.SystemUI.Dialog" parent="@style/Theme.DeviceDefault.Dialog" />
+</resources>

@@ -1,0 +1,1 @@
+based on https://github.com/gnarea/minimal-ktor-server-android
